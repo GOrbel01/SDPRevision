@@ -2,7 +2,7 @@ package functions.scalaworldcup
 
 case class Team(name: String)
 
-case class Competor(name: String)
+case class Player(name: String)
 
 class WorldCupShuffle {
 
