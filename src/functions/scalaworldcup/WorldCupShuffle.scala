@@ -1,8 +1,9 @@
 package functions.scalaworldcup
 
-/**
- * Created by Cloud on 07/05/2015.
- */
+case class Team(name: String)
+
+case class Competor(name: String)
+
 class WorldCupShuffle {
 
 }
