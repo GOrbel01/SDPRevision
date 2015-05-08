@@ -1,12 +1,12 @@
 package functions.scalaworldcup
 
+import collection.mutable._
+
 case class Team(name: String)
 
 case class Player(name: String)
 
-class WorldCupShuffle {
 
-}
 
 object teamGenerator extends App {
   val teams = List(Team("Brazil"), Team("England"), Team("Japan"), Team("South Korea"), Team("Italy"), Team("France"),
@@ -15,4 +15,8 @@ object teamGenerator extends App {
 
   println(teams)
 
+  def shuffle(teams: List[Team], players: List[Player]) : HashMap[Player, List[Team]] = {
+    
+    val players.map((p) => )
+  }
 }
