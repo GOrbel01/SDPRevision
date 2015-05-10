@@ -31,4 +31,43 @@ object HelloWorld {
   printType('f')
 
   println(take3(Vector(11, 22)))
+
+  //Option In Search
+  val names = List("Cloud", "Tidus", "Squall", "Zidane", "Garnet", "Rinoa", "Yuna")
+  val names2 = List("Iain", "John", "Squall", "Benjamin", "James", "Jake", "Lucy")
+
+  val testMap1: scala.collection.immutable.Map[String,String] =
+    Map("England" -> "London", "France" -> "Paris", "Japan" -> "Tokyo", "Germany" -> "Berlin")
+
+  def find(name: String, namestr: List[String] = names): Option[Int] = {
+    var result: Option[Int] = None
+    for (i <- 0 until namestr.length if result == None) {
+      println(i)
+      if (name == namestr(i)) result = Some(i)
+    }
+    result
+  }
+
+  def mapFind(city: String, cityCapitals: Map[String, String]): Option[String] = {
+    var result: Option[String] = None
+    val iter: Iterator[String] = cityCapitals.valuesIterator
+    for (elem <- iter if result == None) {
+      if (city == elem) {
+        result = Some(elem)
+      }
+    }
+    result
+  }
+
+  println(find("Squall"))
+  println(find("Lucy"))
+
+  //Pattern Match Find
+  find("Benjamin", names2) match {
+    case Some(a) => println(s"Found at $a")
+    case None => println("Nothing Found")
+  }
+
+  println(mapFind("London", testMap1))
+
 }
