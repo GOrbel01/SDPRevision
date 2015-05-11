@@ -1,4 +1,4 @@
-package functions.scalafunctions
+package miscprogram
 
 /**
  * Created by Cloud on 10/05/2015.
@@ -30,7 +30,7 @@ case class Persona(name: String, arcana: String, var moves: Vector[String]) exte
   }
 
   def summon: Unit = {
-    ???
+
   }
 
   override def toString: String = { "Name: " + name + ", Arcana: " + arcana + ", Move-List: " + moves.toString() }

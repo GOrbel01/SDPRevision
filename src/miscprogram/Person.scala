@@ -1,6 +1,4 @@
-package functions.scalafunctions
-
-import scala.collection.immutable.Stream.Empty
+package miscprogram
 
 case class Person(name: String, avaPersona: Vector[Persona]) {
   private var equippedPersona: Option[Persona] = None
