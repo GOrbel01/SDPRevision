@@ -19,9 +19,9 @@ object Player {
 
  object TeamGenerator extends App {
    val playerCount: Int = choosePlayers
-   val players: List[Player] = createPlayers
+   val players: Vector[Player] = createPlayers
 
-   var teams = List(Team("Brazil"), Team("England"), Team("Japan"), Team("South Korea"), Team("Italy"), Team("France"),
+   var teams = Vector(Team("Brazil"), Team("England"), Team("Japan"), Team("South Korea"), Team("Italy"), Team("France"),
      Team("Spain"), Team("Uruguay"), Team("Germany"), Team("Switzerland"), Team("Holland")
      , Team("Australia"), Team("Chile"), Team("Greece"), Team("Ivory Coast"), Team("Ecuador"), Team("Colombia")
     , Team("Iran"), Team("Ghana"), Team("Nigeria"), Team("Mexico"), Team("Cameroon"), Team("Algeria"), Team("Belgium")
@@ -30,7 +30,7 @@ object Player {
    val bestDivisor: Int = Math.floor(teams.length/playerCount).toInt
    val remainder: Int = teams.length - (bestDivisor * playerCount)
    val shuffledTeams = Random shuffle teams
-
+   println(shuffledTeams)
    println(assignTeams)
 
    def choosePlayers: Int = {
@@ -46,31 +46,38 @@ object Player {
      }
    }
 
-   def createPlayers: List[Player] = {
-      val pl: List[Player] = List[Player]()
-      for (i <- 0 until playerCount) {
-        pl :+ Player("Player " + i)
+   def createPlayers: Vector[Player] = {
+      var pl: Vector[Player] = Vector[Player]()
+      for (i <- 1 to playerCount) {
+        pl = pl :+ Player("Player " + i)
       }
      pl
    }
 
-   def assignTeams: Map[Int, List[Team]] = {
-     var pm: Map[Int, List[Team]] = new HashMap[Int, List[Team]]
-     val count = 0
+   def assignTeams: Map[Int, Vector[Team]] = {
+     var pm: Map[Int, Vector[Team]] = new HashMap[Int, Vector[Team]]
+     var count = 0
      for (pl <- players) {
-        val map = Map(pl.plID -> shuffledTeams.take(bestDivisor))
-       println(map)
+        pm = pm ++ HashMap(pl.plID -> shuffledTeams.slice(count, count + bestDivisor))
+        count += bestDivisor
      }
-     pm
+     assignRemainders(pm)
    }
 
-//   def printMap(map: Map[Int, List[Team]]) = {
-//      for ((mp) <- map.size) {
-//        print(mp)
-//      }
-//   }
-
-   println(bestDivisor)
+   def assignRemainders(assigns: Map[Int, Vector[Team]]): Map[Int, Vector[Team]] = {
+     var map = assigns
+     var index = teams.length - remainder
+     val rnd = new scala.util.Random
+     val range = 1 to playerCount
+     for (i <- 0 until remainder) {
+       val num = range(rnd.nextInt(range length))
+       var oldTeams = map(num)
+       oldTeams = oldTeams :+ shuffledTeams(index)
+       map = map + (num -> oldTeams)
+       index += 1
+     }
+     map
+   }
  }
 
 
