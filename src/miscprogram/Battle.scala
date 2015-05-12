@@ -50,6 +50,7 @@ object PlayerSetup {
     }
     player = personList.filter((pers) => pers.name == sel).head
   }
+
   def setupPersona() {
     var done = false
     while (!done) {
@@ -74,7 +75,6 @@ object PlayerSetup {
     }
   }
 
-
   def personSelect(): String = {
       println("Select from the list of characters")
       StdIn.readLine()
@@ -97,6 +97,10 @@ object PlayerSetup {
     else {
       println("Persona not found")
     }
+  }
+
+  def personaCreate(): Unit = {
+
   }
 
 }
