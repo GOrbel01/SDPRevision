@@ -25,12 +25,12 @@ case class Persona(name: String, arcana: String, var moves: Vector[String]) exte
     moves = moves.filter((mo) => mo != move)
   }
 
-  def testPrint = {
-    for ((mov) <- this.moves) println(mov)
-  }
-
   def summon: Unit = {
 
+  }
+
+  def testPrint = {
+    for ((mov) <- this.moves) println(mov)
   }
 
   override def toString: String = { "Name: " + name + ", Arcana: " + arcana + ", Move-List: " + moves.toString() }

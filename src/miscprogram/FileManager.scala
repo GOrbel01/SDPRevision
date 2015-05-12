@@ -17,19 +17,20 @@ object FileManager {
   }
 
   def readFile[A](f: File): Vector[A] = {
-    var fis: Option[FileInputStream] = None
-    var ois: Option[ObjectInputStream] = None
-    fis = Some(new FileInputStream(f))
-    ois = Some(new ObjectInputStream(fis.get))
-    ois.get.readObject().asInstanceOf[Vector[A]]
+    if (f.exists()) {
+      var fis: Option[FileInputStream] = None
+      var ois: Option[ObjectInputStream] = None
+      fis = Some(new FileInputStream(f))
+      ois = Some(new ObjectInputStream(fis.get))
+      ois.get.readObject().asInstanceOf[Vector[A]]
+    }
+    else {
+      Vector[A]()
+    }
   }
 
 }
 
 object DataStore extends App {
-  var personaList = Vector()
-  var personList = Vector()
 
-  personaList = FileManager.readFile(new File("PersonaList.txt"))
-  personList = FileManager.readFile(new File("Person.txt"))
 }
