@@ -1,6 +1,21 @@
 package miscprogram
 
-case class Person(name: String, avaPersona: Vector[Persona]) {
+sealed trait Person {
+  val name: String
+  val avaPersona: Vector[Persona]
+
+  def getAvailablePersona: Vector[Persona]
+
+  def hasAvailablePersona: Boolean
+
+  def addPersona(persona: Persona): Unit
+
+  def removePersona(persona: Persona): Unit
+
+  def equipPersona(name: String): Unit
+}
+
+case class PersonImpl(name: String, avaPersona: Vector[Persona]) extends Person {
   private var equippedPersona: Option[Persona] = None
   private var availablePersona: Vector[Persona] = avaPersona
 
@@ -37,8 +52,8 @@ case class Person(name: String, avaPersona: Vector[Persona]) {
 }
 
 object Person {
-  def apply(n: String): Person = new Person(n)
-  def copy(n: String, a: Vector[Persona]) = new Person(n, a)
+  def apply(n: String): Person = new PersonImpl(n)
+  def copy(n: String, a: Vector[Persona]) = new PersonImpl(n, a)
 }
 
 object testPerson extends App {

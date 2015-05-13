@@ -8,7 +8,17 @@ sealed trait Summonable {
   def summon: Unit
 }
 
-case class Persona(name: String, arcana: String, var moves: Vector[String]) extends Summonable {
+sealed trait Persona {
+  val name: String
+  val arcana: String
+  var moves: Vector[String]
+
+  def addMove(move: String): Unit
+
+  def removeMove(move: String): Unit
+}
+
+case class PersonaImpl(name: String, arcana: String, var moves: Vector[String]) extends Persona with Summonable {
   def this(n: String) = {
     this(n, "Unknown", Vector[String]())
   }
@@ -28,18 +38,13 @@ case class Persona(name: String, arcana: String, var moves: Vector[String]) exte
   def summon: Unit = {
 
   }
-
-  def testPrint = {
-    for ((mov) <- this.moves) println(mov)
-  }
-
   override def toString: String = { "Name: " + name + ", Arcana: " + arcana + ", Move-List: " + moves.toString() }
 }
 
 object Persona {
-//  def apply(n: String, p: String, m: Vector[String]) = { new Persona(n, p, m) }
-  def apply(n: String, p: String): Persona = { new Persona(n, p) }
-  def apply(n: String): Persona = new Persona(n)
+  def apply(n: String, p: String, m: Vector[String]) = { new PersonaImpl(n, p, m) }
+  def apply(n: String, p: String): Persona = { new PersonaImpl(n, p) }
+  def apply(n: String): Persona = new PersonaImpl(n)
 }
 
 object testPersona extends App {
