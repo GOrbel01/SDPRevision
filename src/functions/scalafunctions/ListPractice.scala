@@ -3,7 +3,7 @@ package functions.scalafunctions
 /**
  * Created by Cloud on 12/05/2015.
  */
-object ListPractice extends App {
+object ListPractice {
   val seq1: Seq[String] = Seq("Hello", "Goodbye", "Omg")
   var seq2: Seq[String] = Seq("Hello", "Goodbye", "Omg")
   val list1: List[String] = List("Hello", "Goodbye", "Omg")
