@@ -35,12 +35,13 @@ object ListFunctionPractice extends App {
 
   val ab = names.reduceLeft((str1: String, str2: String) => str1 + str2.substring(0, 2))
   val bc = names.foldLeft("")((str1, str2) => str1 + str2.substring(0, 2))
-  println("AB:" + ab)
-  println("BC" + bc)
+  val cd = names.foldLeft("")(_ + _.substring(0, 2))
+  println("FOLD" + bc)
+  println("FOLD_" + cd)
   val numList: Vector[Int] = Vector(1, 4, 5, 7, 9)
-  print("REDUCE:");println((numList reduceRight)(_ + _))
-  print("FOLD:");println((numList fold 1)(_ * _))
-  print("FOLD2:");println((numList fold 1)((n1: Int, n2: Int) => n1 * n2))
+  print("REDUCE:");println(numList reduceLeft(_ + _))
+  print("SUM: ");println(numList.sum) //Same result as Above REDUCE
+  print("PRODUCT: ");println(numList.product)
   val b = (ffnames foldRight Vector.empty[String]) {  //Using Fold to perform an operation that would be done using map
     (x, list) => list :+ ("[" + x + "]")
   }
