@@ -29,8 +29,8 @@ object GoldenRatio extends App {
   val b = estimateB(a, 0, a, 0.000000001)
   println("Estimate for B is: " + (a/b))
 
-  println(lsort(List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), ('d, 'e),
-    List('i, 'j, 'k, 'l), List('m, 'n), List('o))))
+//  println(lsort(List(List('a, 'b, 'c), List('d, 'e), List('f, 'g, 'h), ('d, 'e),
+//    List('i, 'j, 'k, 'l), List('m, 'n), List('o))))
 
   def lsort(list: List[List[Symbol]]): List[List[Symbol]] = {
     val sortedList = list.sortBy((f) => f.length)
